@@ -10,7 +10,9 @@ INC_DIR  := ./inc -I
 SRC_DIR  := ./src
 OBJ_DIR  := .
 
-SRCS	:= 	$(SRC_DIR)/main.c
+SRCS	:= 	$(SRC_DIR)/main.c \
+			$(SRC_DIR)/ft_atoi.c \
+			$(SRC_DIR)/error_check.c
 	
 OBJS	:= ${SRCS:.c=.o}
 

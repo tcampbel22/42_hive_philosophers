@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   error_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 13:19:57 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/06/25 10:52:35 by tcampbel         ###   ########.fr       */
+/*   Created: 2024/06/25 10:49:39 by tcampbel          #+#    #+#             */
+/*   Updated: 2024/06/25 10:54:49 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-# include <pthread.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_philo
+int	ft_is_num(char c)
 {
-	int	ph_num;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	x_eat;
-}	t_philo;
+	if (c >= '0' && c <= '9')
+		return (0);
+	return (1);
+}
 
-int		ft_atoi(const char *str);
-int		ft_is_num(char c);
-int		check_numeric_arg(char **av);
-void	ft_perror(char *str);
+int	check_numeric_arg(char **av)
+{
+	int	i;
+	int	j;
 
-#endif 
+	i = 0;
+	while (av[++i])
+	{
+		j = -1;
+		while (av[i][++j])
+		{
+			if (ft_is_num(av[i][j]))
+				return (1);
+		}
+	}
+	return (0);
+}
+
+void	ft_perror(char *str)
+{
+	int	i;
+
+	i = -1;
+	write(2, "philo: ", 8);
+	while (str[++i])
+		write(2, &str[i], 1);
+}
