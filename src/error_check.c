@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 10:49:39 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/06/25 10:54:49 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/06/26 13:47:43 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_is_num(char c)
 	return (1);
 }
 
-int	check_numeric_arg(char **av)
+int	check_args(char **av)
 {
 	int	i;
 	int	j;
@@ -30,14 +30,14 @@ int	check_numeric_arg(char **av)
 		j = -1;
 		while (av[i][++j])
 		{
-			if (ft_is_num(av[i][j]))
+			if (ft_is_num(av[i][j]) || ft_atoi(av[i]) <= 0)
 				return (1);
 		}
 	}
 	return (0);
 }
 
-void	ft_perror(char *str)
+int	ft_perror(char *str)
 {
 	int	i;
 
@@ -45,4 +45,5 @@ void	ft_perror(char *str)
 	write(2, "philo: ", 8);
 	while (str[++i])
 		write(2, &str[i], 1);
+	return (1);
 }
