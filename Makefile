@@ -11,7 +11,7 @@ SRC_DIR  := ./src
 OBJ_DIR  := .
 
 SRCS	:= 	$(SRC_DIR)/main.c \
-			$(SRC_DIR)/ft_atoi.c \
+			$(SRC_DIR)/ft_atol.c \
 			$(SRC_DIR)/error_check.c \
 			$(SRC_DIR)/initialise.c	
 	

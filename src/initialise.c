@@ -6,53 +6,58 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:55:30 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/06/26 15:02:27 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:30:14 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_mutex(t_data *data)
+int	init_mutex(t_data *waiter)
 {
 	int	i;
 
 	i =  -1;
-	 data->forks= malloc(sizeof(pthread_mutex_t) * (data->ph->ph_num + 1));
-	if (!data->forks)
+	waiter->fork = malloc(sizeof(t_fork));
+	if (!waiter->fork)
 		return (ft_perror("malloc failure\n"));
-	while (++i < data->ph->ph_num)
-		pthread_mutex_init(&data->forks[i], NULL);
+	waiter->fork->forks= malloc(sizeof(pthread_mutex_t) * (waiter->ph_num + 1));
+	if (!waiter->fork->forks)
+		return (ft_perror("malloc failure\n"));
+	while (++i < waiter->ph_num)
+		pthread_mutex_init(&waiter->fork->forks[i], NULL);
 	return (0);
 
 }
-int	init_data_struct(t_data *data, char **av)
-{
-	int		philo_count;
-
-	philo_count = ft_atoi(av[1]);
-	data->ph = malloc(sizeof(t_philo) * (philo_count + 1));
-	if (!data->ph)
-		return(ft_perror("malloc failure"));
-	init_philo_struct(av, data->ph);
-	init_mutex(data);
+int	init_data_struct(t_data *waiter, char **av)
+{	
+	waiter->ph_num = ft_atol(av[1]);
+	if (waiter->ph_num > 1000)
+		ft_perror("Not enough seats at the table :(\n");
+	waiter->time_to_die = ft_atol(av[2]);
+	waiter->time_to_eat = ft_atol(av[3]);
+	waiter->time_to_sleep = ft_atol(av[4]);
+	if (av[5])
+		waiter->meal_count = ft_atol(av[5]);
+	else
+		waiter->meal_count = -1;
+	if (init_philo_struct(av, waiter->ph, waiter->ph_num))
+		return (1);
+	if (init_mutex(waiter))
+		return (1);
 	return (0);
 }
 
-int	init_philo_struct(char **av, t_philo *ph)
+int	init_philo_struct(char **av, t_philo *ph, long ph_num)
 {
 	int	i;
 
 	i = -1;
-	while (++i < ft_atoi(av[1]))
+	ph = malloc(sizeof(t_philo) * (ph_num + 1));
+	if (!ph)
+		return(ft_perror("malloc failure"));
+	while (++i < ft_atol(av[1]))
 	{
 		ph[i].id = i + 1;
-		ph[i].x_eat = 0;
-		ph[i].ph_num = ft_atoi(av[1]);
-		ph[i].time_to_die = ft_atoi(av[2]);
-		ph[i].time_to_eat = ft_atoi(av[3]);
-		ph[i].time_to_sleep = ft_atoi(av[4]);
-		if (av[5] != NULL)
-			ph[i].x_eat = ft_atoi(av[5]);
 		ph->thread = create_thread(ph->thread);
 		if (ph->thread == 1)
 			return (1);	

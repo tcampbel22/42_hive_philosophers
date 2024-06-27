@@ -6,11 +6,28 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 10:49:39 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/06/26 13:47:43 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:56:08 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_isspace(const char c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (0);
+	return (1);
+}
+
+int	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 int	ft_is_num(char c)
 {
@@ -23,6 +40,7 @@ int	check_args(char **av)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
 	while (av[++i])
@@ -30,8 +48,17 @@ int	check_args(char **av)
 		j = -1;
 		while (av[i][++j])
 		{
-			if (ft_is_num(av[i][j]) || ft_atoi(av[i]) <= 0)
-				return (1);
+			while (!ft_isspace(av[i][j]))
+				++j;
+			if (av[i][j] == '+')
+				++j;
+			else if (ft_is_num(av[i][j]))
+				return (ft_perror("invalid arg\n"));
+			k = j;
+			while (!ft_is_num(av[i][k]))
+				++k;
+			if (ft_strlen(av[i]) - j > 10 || ft_atol(av[i]) > INT_MAX)
+				return (ft_perror("exceeded MAX_INT\n"));
 		}
 	}
 	return (0);
