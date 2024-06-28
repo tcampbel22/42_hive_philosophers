@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 10:03:40 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/06/27 12:19:50 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:00:50 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ long	ft_atol(const char *str)
 	}
 	num = convert_char(str);
 	return (num * neg);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		;
+	return (i);
 }
