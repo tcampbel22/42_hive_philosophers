@@ -13,7 +13,10 @@ OBJ_DIR  := .
 SRCS	:= 	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/ft_atol.c \
 			$(SRC_DIR)/error_check.c \
-			$(SRC_DIR)/initialise.c	
+			$(SRC_DIR)/initialise.c	\
+			$(SRC_DIR)/threads.c \
+			$(SRC_DIR)/time.c
+
 	
 OBJS	:= ${SRCS:.c=.o}
 
