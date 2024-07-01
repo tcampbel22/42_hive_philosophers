@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:32:02 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/01 17:31:18 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:42:16 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	start_dinner(t_table *table)
 		return (EXIT_FAILURE);
 	if (create_threads(table))
 		return (EXIT_FAILURE);
-	//if (pthread_create(&table->waiter, NULL, &dinner, NULL))
-	//	return (ft_perror(PTHREAD_CR_ERR));
+	if (pthread_create(&table->waiter, NULL, &dinner, NULL))
+		return (ft_perror(PTHREAD_CR_ERR));
 	return(EXIT_SUCCESS);
 }
