@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:19:57 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/01 16:25:14 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:37:13 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+
+#define E "\033[0m"
+#define G "\033[1m\033[32m"
+#define C "\033[1m\033[36m"
+#define W "\033[1m\033[37m"
+#define RD "\033[1m\033[31m"
+#define B "\033[1m\033[34m"
+#define M "\033[1m\033[35m"
+#define Y "\033[1m\033[33m"
 
 # define INT_MAX 2147483647
 # define EXIT_SUCCESS 0
@@ -83,8 +92,11 @@ typedef struct s_table
 	long		time_to_eat;
 	long		time_to_sleep;
 	long		meal_count;
+	long		ph_wait;
 	t_bool		end_dinner;
-	t_mutex		dead_lock;
+	t_bool		all_philos_full;
+	t_mutex		end_dinner_lock;
+	t_mutex		ph_wait_lock;
 	t_philo		*ph;
 	t_fork		*forks;
 	pthread_t	waiter;
@@ -99,6 +111,8 @@ int			ft_perror(char *str);
 long		get_time(void);
 void		precise_usleep(long time);
 int			print_status(t_philo *ph, t_ph_status status);
+int			ph_eat(t_philo *ph);
+void		*waiter(void *data);
 
 
 #endif
