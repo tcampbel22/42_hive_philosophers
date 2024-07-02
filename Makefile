@@ -16,7 +16,10 @@ SRCS	:= 	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/initialise.c	\
 			$(SRC_DIR)/threads.c \
 			$(SRC_DIR)/time.c \
-			$(SRC_DIR)/write.c 
+			$(SRC_DIR)/write.c \
+			$(SRC_DIR)/eat.c \
+			$(SRC_DIR)/waiter.c
+	
 
 	
 OBJS	:= ${SRCS:.c=.o}
