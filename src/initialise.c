@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialise.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:55:30 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/01 16:26:09 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:50:13 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static int	assign_forks(t_philo *ph, t_fork *forks, int philo_pos)
 	int	ph_num;
 
 	ph_num = ph->table->ph_num;
-	ph->left_fork = &forks[(philo_pos + 1) % ph_num];
-	ph->right_fork = &forks[philo_pos];
 	if (philo_pos % 2 == 0)
 	{
 		ph->right_fork = &forks[philo_pos];
 		ph->left_fork = &forks[(philo_pos + 1) % ph_num];
 	}
+	ph->left_fork = &forks[(philo_pos + 1) % ph_num];
+	ph->right_fork = &forks[philo_pos];
 	return (EXIT_SUCCESS);	
 }
 
@@ -66,22 +66,26 @@ static int	init_mutex(t_table *table, long ph_num)
 	while (++i < ph_num)
 		if (pthread_mutex_init(&table->ph[i].full_lock, NULL))
 			return (ft_perror(MTX_INIT_ERR));
-	if (pthread_mutex_init(&table->dead_lock, NULL))
+	if (pthread_mutex_init(&table->end_dinner_lock, NULL))
+			return (ft_perror(MTX_INIT_ERR));
+	if (pthread_mutex_init(&table->ph_wait_lock, NULL))
 			return (ft_perror(MTX_INIT_ERR));
 	return (EXIT_SUCCESS);
 
 }
+
 static int	init_table(t_table *table, char **av)
 {
 	table->ph = NULL;
 	table->forks = NULL;
 	table->end_dinner = false;
+	table->ph_wait = 0;
 	table->ph_num = ft_atol(av[1]);
 	if (table->ph_num > 1000)
 		ft_perror("Not enough seats at the table :(\n");
-	table->time_to_die = ft_atol(av[2]) * 1000;
-	table->time_to_eat = ft_atol(av[3]) * 1000;
-	table->time_to_sleep = ft_atol(av[4]) * 1000;
+	table->time_to_die = ft_atol(av[2]);
+	table->time_to_eat = ft_atol(av[3]);
+	table->time_to_sleep = ft_atol(av[4]);
 	if (av[5])
 		table->meal_count = ft_atol(av[5]);
 	else
