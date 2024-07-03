@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:38:32 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/03 10:15:14 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:11:11 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	destroy_mutexes(t_table *table)
 {
 	int	i;
 
-	i =  -1;
+	i = -1;
 	while (++i < table->ph_num)
 	{
 		if (pthread_mutex_destroy(&table->forks[i].fork))
@@ -30,14 +30,12 @@ static int	destroy_mutexes(t_table *table)
 	}
 	if (pthread_mutex_destroy(&table->end_dinner_lock))
 		return (ft_perror(MTX_INIT_ERR));
-	if (pthread_mutex_destroy(&table->ph_wait_lock))
-		return (ft_perror(MTX_INIT_ERR));
 	return (EXIT_SUCCESS);
 }
 
 int	free_all(t_table *table, int status)
 {
-	if (destroy_mutexes(table))
+	if (destroy_mutexes(table)) //need to change
 		return (EXIT_FAILURE);
 	if (table->ph)
 		free(table->ph);
@@ -58,6 +56,5 @@ int	main(int ac, char **av)
 		return (free_all(&table, EXIT_FAILURE));
 	if (start_dinner(&table))
 		return (free_all(&table, EXIT_FAILURE));
-	return(free_all(&table, EXIT_SUCCESS));
+	return (free_all(&table, EXIT_SUCCESS));
 }
-

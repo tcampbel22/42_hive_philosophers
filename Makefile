@@ -18,7 +18,8 @@ SRCS	:= 	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/time.c \
 			$(SRC_DIR)/write.c \
 			$(SRC_DIR)/eat.c \
-			$(SRC_DIR)/waiter.c
+			$(SRC_DIR)/waiter.c \
+			$(SRC_DIR)/routines.c
 	
 
 	

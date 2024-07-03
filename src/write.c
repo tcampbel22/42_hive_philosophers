@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:28 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/02 17:28:03 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:28:29 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	print_status(t_philo *ph, t_ph_status status)
 {
 	long	time;
 
-	time = get_time() - ph->table->start_time;	
+	time = get_time() - ph->table->start_time;
 	if (ph->full == true)
 		return (EXIT_SUCCESS);
 	if (pthread_mutex_lock(&ph->table->end_dinner_lock))
@@ -24,9 +24,9 @@ int	print_status(t_philo *ph, t_ph_status status)
 	if (ph->table->end_dinner == false)
 	{
 		if (status == L_FORK)
-			printf(C"%ld"G" [%ld]"W" has taken a left fork\n"E, time, ph->id);
+			printf(C"%ld"G" [%ld]"W" has taken a left fork[%li]\n"E, time, ph->id, ph->left_fork->fork_id); //delete_fork_id
 		else if (status == R_FORK)
-			printf(C"%ld"G" [%ld]"W" has taken a right fork\n"E, time, ph->id);
+			printf(C"%ld"G" [%ld]"W" has taken a right fork[%li]\n"E, time, ph->id, ph->right_fork->fork_id); //delete_fork_id
 		else if (status == EATING)
 			printf(C"%ld"G" [%ld]"B" is eating\n"E, time, ph->id);
 		else if (status == THINKING)

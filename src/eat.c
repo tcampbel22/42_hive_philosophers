@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:09:08 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/03 10:27:08 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:14:12 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	pick_up_forks(t_philo *ph)
 	}
 	else
 	{
+		usleep(2000);
 		if (pthread_mutex_lock(&ph->right_fork->fork))
 			return (ft_perror(MTX_LOCK_ERR));
 		print_status(ph, R_FORK);
@@ -39,10 +40,10 @@ static int	set_last_meal_time(t_philo *ph)
 {
 	if (pthread_mutex_lock(&ph->last_meal_time_lock))
 		return (ft_perror(MTX_LOCK_ERR));
-	ph->last_meal_time = get_time();
+	ph->last_meal_time = get_time() - ph->table->start_time;
 	if (pthread_mutex_unlock(&ph->last_meal_time_lock))
 		return (ft_perror(MTX_ULOCK_ERR));
-	return  (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 static int	set_meals_eaten(t_philo *ph)
@@ -54,7 +55,7 @@ static int	set_meals_eaten(t_philo *ph)
 		return (ft_perror(MTX_LOCK_ERR));
 	if (ph->meals_eaten >= ph->table->meal_count)
 	{
-		printf("%li is now full\n", ph->id); //TESTING
+		printf("Time:%li [%li] is now full\n",ph->last_meal_time, ph->id); //TESTING to be deleted
 		ph->full = true;
 	}
 	if (pthread_mutex_unlock(&ph->full_lock))

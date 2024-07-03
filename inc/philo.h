@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:19:57 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/03 10:58:57 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:40:01 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-#define E "\033[0m"
-#define G "\033[1m\033[32m"
-#define C "\033[1m\033[36m"
-#define W "\033[1m\033[37m"
-#define RD "\033[1m\033[31m"
-#define B "\033[1m\033[34m"
-#define M "\033[1m\033[35m"
-#define Y "\033[1m\033[33m"
+# define E "\033[0m"
+# define G "\033[1m\033[32m"
+# define C "\033[1m\033[36m"
+# define W "\033[1m\033[37m"
+# define RD "\033[1m\033[31m"
+# define B "\033[1m\033[34m"
+# define M "\033[1m\033[35m"
+# define Y "\033[1m\033[33m"
 
 # define INT_MAX 2147483647
 # define EXIT_SUCCESS 0
@@ -44,8 +44,8 @@
 # define MALLOC_ERR "failed to allocate memory\n"
 # define MEAL_COUNT_ERR "meal count is zero, boooooo!\n"
 
-typedef pthread_mutex_t t_mutex;
-typedef struct s_table t_table;
+typedef pthread_mutex_t	t_mutex;
+typedef struct s_table	t_table;
 
 typedef enum e_ph_status
 {
@@ -96,7 +96,6 @@ typedef struct s_table
 	t_bool		end_dinner;
 	t_bool		all_philos_full;
 	t_mutex		end_dinner_lock;
-	t_mutex		ph_wait_lock;
 	t_philo		*ph;
 	t_fork		*forks;
 	pthread_t	waiter;
@@ -114,6 +113,6 @@ int			print_status(t_philo *ph, t_ph_status status);
 int			ph_eat(t_philo *ph);
 void		*waiter(void *data);
 int			is_dead(t_table *table);
-
+void		*dinner(void *philo);
 
 #endif
