@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialise.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:55:30 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/02 15:50:13 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:50:52 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int	init_philo_struct(t_table *table, t_philo *ph, long ph_num)
 		ph[i].full = false;
 		ph[i].meals_eaten = 0;
 		ph[i].table = table;
+		ph[i].left_fork = NULL;
+		ph[i].right_fork = NULL;
 		assign_forks(&ph[i], table->forks, i);
 	}
 	return (EXIT_SUCCESS);
@@ -80,6 +82,8 @@ static int	init_table(t_table *table, char **av)
 	table->forks = NULL;
 	table->end_dinner = false;
 	table->ph_wait = 0;
+	table->all_philos_full = false;
+	table->start_time = 0;
 	table->ph_num = ft_atol(av[1]);
 	if (table->ph_num > 1000)
 		ft_perror("Not enough seats at the table :(\n");

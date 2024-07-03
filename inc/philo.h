@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:19:57 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/02 16:37:13 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:58:57 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void		precise_usleep(long time);
 int			print_status(t_philo *ph, t_ph_status status);
 int			ph_eat(t_philo *ph);
 void		*waiter(void *data);
+int			is_dead(t_table *table);
 
 
 #endif

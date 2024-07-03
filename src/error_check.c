@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 10:49:39 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/02 11:09:22 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:20:08 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_args(char **av)
 
 int	ft_perror(char *str)
 {
-	write(2, "philo: ", 8);
-	write(2, &str, ft_strlen(str));
+	write(2, "philo: ", 7);
+	write(2, str, ft_strlen(str));
 	return (EXIT_FAILURE);
 }

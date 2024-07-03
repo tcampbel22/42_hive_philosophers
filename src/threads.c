@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:32:02 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/02 16:26:28 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:59:26 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	*dinner(void *philo)
 	pthread_mutex_lock(&ph->table->ph_wait_lock);
 	ph->table->ph_wait++;
 	pthread_mutex_unlock(&ph->table->ph_wait_lock);
-	while (ph->table->end_dinner == false)
+	while (is_dead(ph->table) == 0)
 	{
 		if (ph->full == true)
 			break ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   waiter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 12:49:50 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/02 17:31:06 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:56:31 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	check_philos(t_table *table)
 		pthread_mutex_lock(&table->ph[i].last_meal_time_lock);	
 		if ((get_time() - table->start_time - table->ph[i].last_meal_time) >= table->time_to_die && table->end_dinner == false)
 		{
+			print_status(&table->ph[i], DEAD);
 			pthread_mutex_lock(&table->end_dinner_lock);
 			table->end_dinner = true;
 			pthread_mutex_unlock(&table->end_dinner_lock);
-			print_status(&table->ph[i], DEAD);
 		}
 		pthread_mutex_unlock(&table->ph[i].last_meal_time_lock);
 		pthread_mutex_lock(&table->ph[i].meals_eaten_lock);

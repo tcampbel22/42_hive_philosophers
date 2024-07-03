@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tcampbel <tcampbel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:38:32 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/02 15:45:45 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/03 10:15:14 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	main(int ac, char **av)
 {
 	t_table	table;
 
-	if (ac != 5 && ac !=  6)
-		return (ft_perror(ARG_COUNT_ERR));
+	if (ac != 5 && ac != 6)
+		return (ft_perror("Invalid arg amount\n"));
 	if (check_args(av))
 		return (EXIT_FAILURE);
 	if (init_structs(&table, av))
