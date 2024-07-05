@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:19:57 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/04 16:15:49 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:44:51 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ typedef struct s_table
 	long		time_to_eat;
 	long		time_to_sleep;
 	long		meal_count;
-	long		ph_wait;
 	t_bool		end_dinner;
-	t_bool		all_philos_full;
 	t_mutex		end_dinner_lock;
 	t_philo		*ph;
 	t_fork		*forks;
@@ -118,6 +116,5 @@ int			destroy_full_lock(t_table *table, int index);
 int			destroy_time_lock(t_table *table, int index);
 int			destroy_meals(t_table *table, int index);
 int			destroy_forks(t_table *table, int index);
-int			is_full(t_philo *ph);
 
 #endif
