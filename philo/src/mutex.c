@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:28:40 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/04 16:41:02 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:50:25 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	destroy_full_lock(t_table *table, int index)
 		return (ft_perror(MTX_DES_ERR));
 	return (0);
 }
-
 
 int	destroy_mutexes(t_table *table, int index, int flag)
 {
