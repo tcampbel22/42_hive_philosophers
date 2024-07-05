@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:55:30 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/04 16:14:26 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:43:37 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static int	init_table(t_table *table, char **av)
 	table->ph = NULL;
 	table->forks = NULL;
 	table->end_dinner = false;
-	table->all_philos_full = false;
 	table->start_time = 0;
 	table->ph_num = ft_atol(av[1]);
 	if (table->ph_num > 500)
