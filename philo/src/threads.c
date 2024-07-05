@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:32:02 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/04 16:41:20 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/05 12:10:42 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static int	thread_err(t_table *table, int index)
 	while (index-- > 0)
 	{
 		if (pthread_join(table->ph[index].thread, NULL))
+		{
+			if (destroy_mutexes(table, (int)table->ph_num, 1))
+				return (EXIT_FAILURE);
 			return (ft_perror(PTHREAD_JOIN_ERR));
+		}
 	}
 	if (destroy_mutexes(table, (int)table->ph_num, 1))
 		return (EXIT_FAILURE);

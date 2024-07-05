@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:39:18 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/04 15:08:33 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:49:56 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	*dinner(void *philo)
 	ph = (t_philo *)philo;
 	if (ph->table->ph_num == 1)
 		forever_alone(ph);
+	if (ph->id % 2)
+		precise_usleep(ph->table->time_to_eat);
 	while (is_dead(ph->table) == 0)
 	{
-		if (is_full(ph) == 0)
-			break ;
 		ph_eat(ph);
 		ph_sleep_and_think(ph);
 	}

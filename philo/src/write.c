@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:42:28 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/04 15:09:07 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:18:58 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	print_status(t_philo *ph, t_ph_status status)
 	long	time;
 
 	time = get_time() - ph->table->start_time;
-	if (is_full(ph) == 0)
-		return (EXIT_SUCCESS);
 	pthread_mutex_lock(&ph->table->end_dinner_lock);
 	if (ph->table->end_dinner == false)
 	{
