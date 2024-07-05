@@ -6,7 +6,7 @@
 /*   By: tcampbel <tcampbel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:09:08 by tcampbel          #+#    #+#             */
-/*   Updated: 2024/07/04 14:58:40 by tcampbel         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:48:41 by tcampbel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,10 @@
 
 static int	pick_up_forks(t_philo *ph)
 {
-	if (ph->id % 2 == 0)
-	{
-		pthread_mutex_lock(&ph->left_fork->fork);
-		print_status(ph, L_FORK);
-		pthread_mutex_lock(&ph->right_fork->fork);
-		print_status(ph, R_FORK);
-	}
-	else
-	{
-		usleep(ph->table->time_to_eat);
-		pthread_mutex_lock(&ph->right_fork->fork);
-		print_status(ph, R_FORK);
-		pthread_mutex_lock(&ph->left_fork->fork);
-		print_status(ph, L_FORK);
-	}
+	pthread_mutex_lock(&ph->left_fork->fork);
+	print_status(ph, L_FORK);
+	pthread_mutex_lock(&ph->right_fork->fork);
+	print_status(ph, R_FORK);
 	return (EXIT_SUCCESS);
 }
 
@@ -45,7 +34,7 @@ static int	set_meals_eaten(t_philo *ph)
 	pthread_mutex_lock(&ph->meals_eaten_lock);
 	ph->meals_eaten++;
 	pthread_mutex_lock(&ph->full_lock);
-	if (ph->meals_eaten >= ph->table->meal_count)
+	if (ph->meals_eaten == ph->table->meal_count)
 		ph->full = true;
 	pthread_mutex_unlock(&ph->full_lock);
 	pthread_mutex_unlock(&ph->meals_eaten_lock);
